@@ -564,6 +564,29 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
 	};
 }
 
+export interface ApiDevelopmentDevelopment extends Struct.CollectionTypeSchema {
+	collectionName: 'developments';
+	info: {
+		displayName: 'development';
+		pluralName: 'developments';
+		singularName: 'development';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		createdAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		locale: Schema.Attribute.String & Schema.Attribute.Private;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::development.development'> &
+			Schema.Attribute.Private;
+		publishedAt: Schema.Attribute.DateTime;
+		tiitle: Schema.Attribute.String;
+		updatedAt: Schema.Attribute.DateTime;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+	};
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 	collectionName: 'globals';
 	info: {
@@ -1049,6 +1072,7 @@ declare module '@strapi/strapi' {
 			'api::author.author': ApiAuthorAuthor;
 			'api::blog.blog': ApiBlogBlog;
 			'api::category.category': ApiCategoryCategory;
+			'api::development.development': ApiDevelopmentDevelopment;
 			'api::global.global': ApiGlobalGlobal;
 			'api::hero.hero': ApiHeroHero;
 			'plugin::content-releases.release': PluginContentReleasesRelease;
